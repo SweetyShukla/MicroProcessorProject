@@ -1,7 +1,7 @@
 #include<LiquidCrystal.h>
 #include<SoftwareSerial.h>
 #include<TinyGPS.h>
-
+//gps- mt3299, gsm- sim900a
 
 const int AOUTpin=0;
 const int DOUTpin=7;
@@ -10,12 +10,12 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 SoftwareSerial sim(9,10);
 TinyGPS gps;
 
-int value;
+int value; 
 int c=1;
 float x,y;
 
 void setup() {
-  // put your setup code here, to run once:
+  // code to run once:
   Serial.begin(19200);
   sim.begin(19200);
   pinMode(AOUTpin,INPUT);
@@ -34,8 +34,9 @@ void sendMessage()
     Serial.println("sending");
     sim.println("AT+CMGF=1");
     delay(1000);
-    sim.println("AT+CMGS=\"+919938734697\"\r");
+    sim.println("AT+CMGS=\"+918280079489\"\r");
     delay(1000);
+    sim.print("Name: Ajay, Veh No- OD56LX at ");
     sim.print("http://maps.google.com/maps?q=loc:");
     sim.print(flat == TinyGPS::GPS_INVALID_F_ANGLE ? 0.0 : flat, 6);
     Serial.print(",");
@@ -56,7 +57,7 @@ void detected()
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  // code to run repeatedly:
   value=analogRead(AOUTpin);
   x=((value*0.21)/1023);
   y=gps.f_speed_kmph();
@@ -71,7 +72,7 @@ void loop() {
   delay(5000);
   if(c!=0)
   {
-  if(x>0.06)
+  if(x>0.09)
   {
     c=0;
     sendMessage();
