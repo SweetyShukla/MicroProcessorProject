@@ -37,9 +37,9 @@ void sendMessage()
     Serial.println("sending");
     sim.println("AT+CMGF=1");
     delay(1000);
-    sim.println("AT+CMGS=\"+919938734697\"\r");
+    sim.println("AT+CMGS=\"+918280079489\"\r");
     delay(1000);
-    sim.println("Hi I am Himansu");
+    sim.println("Hi I am Sweety");
     delay(1000);
     sim.println((char)26);
     delay(1000);
